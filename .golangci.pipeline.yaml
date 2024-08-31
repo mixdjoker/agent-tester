@@ -7,21 +7,13 @@ run:
   cache:
     enable: true
     dir: ./golangci-lint-cache
-  skip-dirs:
-    - bin
-    - vendor
-    - var
-    - tmp
-    - .cache
 
 output:
-  format: colored-line-number
+  formats: colored-line-number
   print-issued-lines: true
   print-linter-name: true
 
 linters-settings:
-  govet:
-    check-shadowing: true
   dupl:
     threshold: 100
   goconst:
@@ -44,8 +36,16 @@ linters:
     - misspell
     - gosimple
     - prealloc
+    - predeclared
 
 issues:
+  skip-dirs:
+    - bin
+    - vendor
+    - var
+    - tmp
+    - .cache
+
   exclude-rules:
     # Exclude some linters from running on tests files.
     - path: _test\.go

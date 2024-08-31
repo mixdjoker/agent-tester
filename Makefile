@@ -42,9 +42,9 @@ update-deps:
 PHONY: init
 init:
 	$(SILENT) rm -rf $(LOCAL_BIN)
-	$(SILENT) rm -rf $(GOLINT_CACH)
+	$(SILENT) rm -rf $(GOLINT_CACHE)
 	$(SILENT) mkdir -p $(LOCAL_BIN)
-	$(SILENT) mkdir -p $(GOLINT_CACH)
+	$(SILENT) mkdir -p $(GOLINT_CACHE)
 	make install-deps
 	make download-deps
 
