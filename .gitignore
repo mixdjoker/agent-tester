@@ -5,5 +5,5 @@
 # Secrets
 .credentials
 
-# env file
-.env
+# Prod env file
+*.prod.env
