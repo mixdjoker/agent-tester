@@ -1,10 +1,12 @@
 package closer
 
 import (
-	"log"
+	"context"
 	"os"
 	"os/signal"
 	"sync"
+
+	"github.com/mixdjoker/agent-tester/internal/logger"
 )
 
 var globalCloser = New()
@@ -79,7 +81,7 @@ func (c *Closer) CloseAll() {
 
 		for i := 0; i < cap(errs); i++ {
 			if err := <-errs; err != nil {
-				log.Println("error returned from Closer")
+				logger.Err(context.Background(), err).Msg("Closer error")
 			}
 		}
 	})
