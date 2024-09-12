@@ -6,7 +6,6 @@ import (
 	"github.com/gofrs/uuid"
 )
 
-// TesterService ...
 // TesterService provides methods to interact with the tester service.
 type TesterService interface {
 	// Update updates the tester service and returns the number of records updated.
