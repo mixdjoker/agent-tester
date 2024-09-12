@@ -11,7 +11,7 @@ const (
 	certPathEnv = "TESTER_CERT_FILE"
 )
 
-// Certificator ...
+// Certificator is an interface for retrieving key and cert file paths.
 type Certificator interface {
 	Key() string
 	Cert() string
@@ -22,7 +22,10 @@ type certConfig struct {
 	certPath string
 }
 
-// NewCertConfig ...
+// NewCertConfig initializes a new Certificator by loading the key and certificate paths from environment variables.
+// It checks if both the key and certificate file paths are valid using fileCheck().
+// If either path is missing or invalid, it returns an error.
+// Otherwise, it creates a certConfig struct and returns it as a Certificator.
 func NewCertConfig() (Certificator, error) {
 	keyPath := os.Getenv(keyPathEnv)
 	if keyPath == "" {
