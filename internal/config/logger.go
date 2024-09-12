@@ -5,6 +5,11 @@ import (
 )
 
 const (
+	logLevelEnv  = "TESTER_LOG_LEVEL"
+	logFormatEnv = "TESTER_LOG_FORMAT"
+)
+
+const (
 	defaultLevel  = "info"
 	defaultFormat = "15:04:05"
 )
@@ -17,12 +22,12 @@ type LogConfig interface {
 
 // NewLoggerConfig creates and returns a new instance of LogConfig.
 func NewLoggerConfig() (LogConfig, error) {
-	level := os.Getenv("")
+	level := os.Getenv(logLevelEnv)
 	if level == "" {
 		level = defaultLevel
 	}
 
-	format := os.Getenv("")
+	format := os.Getenv(logFormatEnv)
 	if format == "" {
 		format = defaultFormat
 	}
