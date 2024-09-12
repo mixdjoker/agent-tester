@@ -6,11 +6,13 @@ import (
 	"github.com/gofrs/uuid"
 )
 
+// TestStatus ...
 type TestStatus struct {
 	Status string
 	Reason string
 }
 
+// SynchronoisTest ...
 type SynchronoisTest struct {
 	ID          uuid.UUID
 	Name        string
@@ -20,6 +22,7 @@ type SynchronoisTest struct {
 	Status      TestStatus
 }
 
+// PeriodicTest ...
 type PeriodicTest struct {
 	ID       uuid.UUID
 	Name     string
@@ -29,6 +32,7 @@ type PeriodicTest struct {
 	Status   TestStatus
 }
 
+// TestResult ...
 type TestResult struct {
 	ID        uuid.UUID
 	Status    string

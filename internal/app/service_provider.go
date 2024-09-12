@@ -25,7 +25,7 @@ func newServiceProvider() *serviceProvider {
 
 func (s *serviceProvider) APIConfig() config.APIConfiger {
 	if s.apiConfig == nil {
-		cfg, err := config.NewApiConfig()
+		cfg, err := config.NewAPIConfig()
 		if err != nil {
 			logger.Fatalf(context.Background(), err, "failed to get API Config")
 		}

@@ -11,6 +11,7 @@ const (
 	apiPortEnv = "TESTER_API_PORT"
 )
 
+// APIConfiger ...
 type APIConfiger interface {
 	Address() string
 }
@@ -20,7 +21,8 @@ type apiConfig struct {
 	port string
 }
 
-func NewApiConfig() (APIConfiger, error) {
+// NewAPIConfig ...
+func NewAPIConfig() (APIConfiger, error) {
 	cfg := apiConfig{
 		host: os.Getenv(apiHostEnv),
 		port: os.Getenv(apiPortEnv),
@@ -33,6 +35,7 @@ func NewApiConfig() (APIConfiger, error) {
 	return &cfg, nil
 }
 
+// Address ...
 func (a *apiConfig) Address() string {
 	return net.JoinHostPort(a.host, a.port)
 }

@@ -11,6 +11,7 @@ const (
 	certPathEnv = "TESTER_CERT_FILE"
 )
 
+// Certificator ...
 type Certificator interface {
 	Key() string
 	Cert() string
@@ -21,6 +22,7 @@ type certConfig struct {
 	certPath string
 }
 
+// NewCertConfig ...
 func NewCertConfig() (Certificator, error) {
 	keyPath := os.Getenv(keyPathEnv)
 	if keyPath == "" {

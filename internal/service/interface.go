@@ -6,6 +6,7 @@ import (
 	"github.com/gofrs/uuid"
 )
 
+// TesterService ...
 type TesterService interface {
 	Update(ctx context.Context) (int64, error)
 	UpdateByID(ctx context.Context, id uuid.UUID) error

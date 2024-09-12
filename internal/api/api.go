@@ -8,11 +8,13 @@ import (
 	"github.com/mixdjoker/agent-tester/internal/service"
 )
 
+// Mux ...
 type Mux struct {
 	http.ServeMux
 	ts service.TesterService
 }
 
+// NewMux ...
 func NewMux(ts service.TesterService) *Mux {
 	m := Mux{
 		ServeMux: *http.NewServeMux(),
@@ -46,14 +48,14 @@ func (m *Mux) updateByID(w http.ResponseWriter, r *http.Request) {
 	id, err := uuid.FromString(idStr)
 	if err != nil {
 		logger.Err(ctx, err).Msg("wrong ID")
-		http.Error(w, "", http.StatusBadRequest)
+		http.Error(w, "wrong ID", http.StatusBadRequest)
 		return
 	}
 
 	err = m.ts.UpdateByID(ctx, id)
 	if err != nil {
 		logger.Err(ctx, err).Msg("update by id failed")
-		http.Error(w, "", http.StatusInternalServerError)
+		http.Error(w, "failed to update by ID", http.StatusInternalServerError)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
@@ -64,11 +66,15 @@ func (m *Mux) results(w http.ResponseWriter, r *http.Request) {
 
 	res, err := m.ts.GetResults(ctx)
 	if err != nil {
-		logger.Err(ctx, err).Msg("get result failed")
-		http.Error(w, "", http.StatusInternalServerError)
+		logger.Err(ctx, err).Msg("failed to get results")
+		http.Error(w, "failed to get results", http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(res)
+	w.Header().Set("Content-Type", "application/json")
+	if _, err := w.Write(res); err != nil {
+		logger.Err(ctx, err).Msg("failed write resonse")
+		return
+	}
 }

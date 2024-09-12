@@ -34,7 +34,7 @@ func (a *App) initDeps(ctx context.Context) error {
 		a.initConfig,
 		a.initLogger,
 		a.initServiceProvider,
-		a.initApiServer,
+		a.initAPIServer,
 	}
 
 	for _, f := range inits {
@@ -73,7 +73,7 @@ func (a *App) initServiceProvider(_ context.Context) error {
 	return nil
 }
 
-func (a *App) initApiServer(_ context.Context) error {
+func (a *App) initAPIServer(_ context.Context) error {
 	a.api = &http3.Server{
 		Addr:    a.sp.APIConfig().Address(),
 		Handler: a.sp.APIMux(),
