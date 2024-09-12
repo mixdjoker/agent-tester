@@ -13,7 +13,8 @@ type TestStatus struct {
 }
 
 // SynchronoisTest ...
-type SynchronoisTest struct {
+// SynchronousTest represents a synchronous test.
+type SynchronousTest struct {
 	ID          uuid.UUID
 	Name        string
 	Command     string
