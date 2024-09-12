@@ -41,11 +41,3 @@ type TestResult struct {
 	StartTime time.Time
 	EndTime   time.Time
 }
-type TestResult struct {
-	ID        uuid.UUID
-	Status    string
-	Data      []byte
-	Error     string
-	StartTime time.Time
-	EndTime   time.Time
-}
