@@ -2,6 +2,9 @@
 /bin/
 /.golangci-lint-cache/
 
+# Certificates
+/certs/
+
 # Secrets
 .credentials
 

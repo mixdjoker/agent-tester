@@ -1,10 +1,11 @@
-include .local.env
+include .env
 include .credentials
 
 # Project directories
 LOCAL_BIN=$(CURDIR)/bin
 CONF_DIR=$(CURDIR)/config
 SOURCE_DIR=$(CURDIR)/cmd
+CERT_DIR=$(CURDIR)/certs
 
 # Go compilation arguments
 GOARCH?=amd64
@@ -71,4 +72,17 @@ build-prod:
 PHONY: run
 run:
 	$(SILENT) $(GO_CMP_ARGS) go run $(SOURCE_DIR)
+
+# Make certs
+PHONY: update-certs
+update-certs:
+	rm -rf $(CERT_DIR)
+	mkdir -p $(CERT_DIR)
+	make generate-certs
+	cp -rf $(CERT_DIR) $(LOCAL_BIN)
+
+PHONY: generate-certs
+generate-certs:
+	openssl genpkey -algorithm RSA -out $(CERT_DIR)/key.pem -pkeyopt rsa_keygen_bits:2048
+	openssl req -new -x509 -key $(CERT_DIR)/key.pem -out $(CERT_DIR)/cert.pem -days 365 -subj "/C=RU/ST=Moscow/L=Moscow/O=dJoker/CN=djoker.com"
 
